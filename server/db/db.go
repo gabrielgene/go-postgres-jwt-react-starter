@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/go-postgres-jwt-react-starter/server/config"
+	"github.com/rogaha/go-postgres-jwt-react-starter/server/config"
 )
 
 //DB instance
@@ -18,6 +18,7 @@ func Connect() {
 	db, _ := sql.Open("postgres", dbinfo)
 	err := db.Ping()
 	if err != nil {
+		log.Println(err)
 		log.Fatal("Error: Could not establish a connection with the database")
 	}
 	DB = db

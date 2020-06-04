@@ -3,7 +3,7 @@ package utils
 import (
 	"regexp"
 
-	"github.com/go-postgres-jwt-react-starter/server/db"
+	"github.com/rogaha/go-postgres-jwt-react-starter/server/db"
 )
 
 const (
