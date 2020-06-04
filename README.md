@@ -8,15 +8,33 @@ It uses the go gin framework.
 
 ## Getting started
 
-Download and install [golang](https://golang.org)
+### With Docker
 
-Download and install [postgres](https://www.postgresql.org/download/)
-- [Setup Postgres](https://www.codementor.io/engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb): Setting up postgres on a mac
+ - Install [Docker](https://docs.docker.com/get-docker/) 
 
-- [Setup postgres- windows](https://www.robinwieruch.de/postgres-sql-windows-setup/): Setting up postgres on windows
+ - Install [Docker Compose](https://docs.docker.com/compose/install/) 
+
+### Without Docker
+
+ - Download and install [golang](https://golang.org)
+
+ - Download and install [postgres](https://www.postgresql.org/download/)
+    - [Setup Postgres](https://www.codementor.io/engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb): Setting up postgres on a mac
+
+   - [Setup postgres- windows](https://www.robinwieruch.de/postgres-sql-windows-setup/): Setting up postgres on windows
 
 ## Usage
 Clone this repository
+
+### With Docker
+
+```
+docker-compose up
+```
+
+That's all :)
+
+### Without Docker
 
 Use the queries in the [server/db/.psql](./server/db/.postgres) file to setup the database.
 
