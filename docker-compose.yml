@@ -1,0 +1,21 @@
+version: "3"
+services:
+  db:
+    image: postgres:12-alpine
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+  api:
+    build: ./server
+    ports:
+      - 8081:8081
+    restart: on-failure
+    depends_on:
+      - db
+  app:
+    build: ./client
+    ports:
+      - 3000:3000
