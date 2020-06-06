@@ -24,7 +24,7 @@ type Claims struct {
 
 // Pong tests that api is working
 func Pong(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{"ping": "pong"})
+	c.JSON(http.StatusOK, gin.H{"ping": "blu"})
 }
 
 //Create new user
