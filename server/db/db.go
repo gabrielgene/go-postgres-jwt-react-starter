@@ -22,6 +22,9 @@ func Connect() {
 		log.Fatal("Error: Could not establish a connection with the database")
 	}
 	DB = db
-	// Create "users" table if it doesnt exist
+	// Create tables if it doesnt exist
 	CreateUsersTable()
+	CreateLocationsTable()
+	CreateCustomersTable()
+	CreatePaymentsTable()
 }
