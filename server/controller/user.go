@@ -28,7 +28,7 @@ func Pong(c *gin.Context) {
 }
 
 //Create new user
-func Create(c *gin.Context) {
+func UserCreate(c *gin.Context) {
 	var user db.Register
 	c.Bind(&user)
 	exists := checkUserExists(user)
