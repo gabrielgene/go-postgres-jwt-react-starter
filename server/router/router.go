@@ -15,10 +15,22 @@ func SetupRouter() *gin.Engine {
 	router.Use(middlewares.ErrorHandler)
 	router.Use(middlewares.CORSMiddleware())
 
-	// routes
 	router.GET("/ping", controller.Pong)
-	router.POST("/register", controller.Create)
+
+	// User
+	router.POST("/register", controller.UserCreate)
 	router.POST("/login", controller.Login)
 	router.GET("/session", controller.Session)
+
+	// Customers
+	router.GET("/customers", controller.GetAllCustomers)
+	router.GET("/customers/:id", controller.GetCustomerByID)
+	router.GET("/customers/:id/paymentmethods", controller.GetPaymentsByCustomerID)
+	router.GET("/customers/:id/paymentmethods/count", controller.GetPaymentsCountByCustomerID)
+	router.POST("/customers", controller.CreateCustomer)
+
+	// Payments
+	router.POST("/paymentmethods", controller.CreatePayment)
+
 	return router
 }
