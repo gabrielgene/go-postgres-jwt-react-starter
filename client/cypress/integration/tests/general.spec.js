@@ -76,4 +76,23 @@ context('General', () => {
 
     cy.get(':nth-child(2)').contains(name);
   });
+
+  it('Allow someone to edit a Customer.', () => {
+    const newName = `John Smith ${new Date().getTime()}`;
+
+    cy.get('[data-cy=email]').type('teste@test.com');
+    cy.get('[data-cy=pass]').type('teste123');
+    cy.get('[data-cy=submit]').click();
+
+    cy.get('.MuiList-root > :nth-child(1)').click();
+    cy.get('[data-cy=edit-customer]').click();
+
+    cy.get('#name').clear().type(newName);
+
+    cy.get('[data-cy=submit]').click();
+    cy.wait(1000);
+    cy.reload();
+
+    cy.get('.MuiTypography-h6').contains(newName);
+  });
 });
