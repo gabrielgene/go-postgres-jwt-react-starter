@@ -10,31 +10,56 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import * as S from './styles';
 
+const addDefaultValues = {
+  email: '',
+  name: '',
+  telephone: '',
+  latitude: '',
+  longitude: '',
+  country: '',
+  street: '',
+};
+
 const CustomerAdd = (props) => {
+  const isEditMode = props.match.path === '/edit/customer';
+
+  const editState = props.location.state;
+
   const handleClose = () => {
-    props.history.push('/');
+    props.history.push(
+      isEditMode ? `/customer/${editState.customerID}` : '/customers'
+    );
   };
 
   const formik = useFormik({
-    initialValues: {
-      email: '',
-      name: '',
-      telephone: '',
-      latitude: '',
-      longitude: '',
-      country: '',
-      street: '',
-    },
+    initialValues: isEditMode
+      ? {
+          ...editState,
+          latitude: editState.Location.latitude,
+          longitude: editState.Location.longitude,
+          country: editState.Location.country,
+          street: editState.Location.street1,
+        }
+      : addDefaultValues,
     onSubmit: (values) => {
       fetch(`${apiURl}/customers`, {
         method: 'POST',
+        credentials: 'include',
         body: JSON.stringify({
           ...values,
+          customerID: isEditMode && parseInt(editState.customerID, 10),
+          location: {
+            latitude: values.latitude,
+            longitude: values.longitude,
+            country: values.country,
+            street1: values.street,
+          },
         }),
         headers: {
           'Content-Type': 'application/json',
+          Authorization: document.cookie,
         },
-      }).then(() => handleClose());
+      });
     },
   });
 
@@ -51,7 +76,9 @@ const CustomerAdd = (props) => {
       maxWidth="sm"
       aria-labelledby="form-dialog-title"
     >
-      <DialogTitle id="form-dialog-title">Adicionar Customer</DialogTitle>
+      <DialogTitle id="form-dialog-title">
+        {isEditMode ? 'Edit Customer' : 'Add Customer'}
+      </DialogTitle>
       <DialogContent>
         <S.DialogWrapper>
           <S.TextField
@@ -112,8 +139,8 @@ const CustomerAdd = (props) => {
         <Button onClick={handleClose} color="primary">
           Cancelar
         </Button>
-        <Button onClick={handleSubmit} color="primary">
-          Adicionar
+        <Button onClick={handleSubmit} color="primary" data-cy="submit">
+          Editar
         </Button>
       </DialogActions>
     </Dialog>

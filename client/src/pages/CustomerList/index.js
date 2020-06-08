@@ -5,18 +5,27 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Topbar from '../../components/Topbar';
-
-// import * as S from './styles';
+import { apiURl } from '../../api';
 
 const CustomerList = ({ history }) => {
   const [customers, setCustomers] = React.useState([]);
-  const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
-    fetch('http://localhost:8081/customers')
-      .then((response) => response.json())
-      .then((data) => setCustomers(data.customers));
-  }, [open]);
+    fetch(`${apiURl}/customers`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+        Authorization: document.cookie,
+      },
+    })
+      .then((response) =>
+        response.status === 401 ? history.push('/') : response.json()
+      )
+      .then((data) => {
+        data && setCustomers(data.customers);
+      });
+  }, []);
 
   return (
     <React.Fragment>
@@ -37,7 +46,7 @@ const CustomerList = ({ history }) => {
             </ListItemAvatar>
             <ListItemText
               primary={c.name}
-              secondary={`${c.telephone} - ${c.email}`}
+              secondary={`${c.telephone} - ${c.email} - ${c.Location.country}`}
             />
           </ListItem>
         ))}
