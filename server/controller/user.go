@@ -27,7 +27,7 @@ func Pong(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"ping": "blu"})
 }
 
-//Create new user
+//UserCreate new user
 func UserCreate(c *gin.Context) {
 	var user db.Register
 	c.Bind(&user)
