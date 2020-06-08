@@ -5,15 +5,13 @@ import * as S from './styles';
 const Topbar = ({ history, customer, payment }) => {
   return (
     <S.TopBar>
-      <S.Button onClick={() => history.push('/')}>Customers</S.Button>
+      <S.Button onClick={() => history.push('/customers')}>Customers</S.Button>
       {customer && (
-        <S.Button onClick={() => history.push('/add/customer')}>
+        <S.Button
+          data-cy="add-customer"
+          onClick={() => history.push('/add/customer')}
+        >
           Adicionar Customer
-        </S.Button>
-      )}
-      {payment && (
-        <S.Button onClick={() => history.push('/add/customer')}>
-          Adicionar Payment
         </S.Button>
       )}
     </S.TopBar>
