@@ -14,6 +14,7 @@ func SetupRouter() *gin.Engine {
 	// Middlewares
 	router.Use(middlewares.ErrorHandler)
 	router.Use(middlewares.CORSMiddleware())
+	router.Use(middlewares.AuthMiddleware())
 
 	router.GET("/ping", controller.Pong)
 
