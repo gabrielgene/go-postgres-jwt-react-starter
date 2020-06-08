@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import MUITextField from '@material-ui/core/TextField';
 
 export const CustomerWrapper = styled.div`
   padding: 8px;

@@ -14,49 +14,45 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
 export default function SimpleTable({ customerId }) {
   const classes = useStyles();
   const [payments, setPayments] = React.useState([]);
 
-  console.log(payments);
   React.useEffect(() => {
-    fetch(`http://localhost:8081/customers/${customerId}/paymentmethods`)
+    fetch(`http://localhost:8081/customers/${customerId}/paymentmethods`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+        Authorization: document.cookie,
+      },
+    })
       .then((response) => response.json())
       .then((data) => setPayments(data.payments));
   }, []);
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
+    <TableContainer style={{ maxHeight: 440 }} component={Paper}>
+      <Table stickyHeader className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Type</TableCell>
-            <TableCell align="right">Name</TableCell>
+            <TableCell>Method Type</TableCell>
+            <TableCell align="right">Name On Card</TableCell>
             <TableCell align="right">Card Bin</TableCell>
             <TableCell align="right">E Wallet</TableCell>
+            <TableCell align="right">Country</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {payments.map((row) => (
-            <TableRow key={row.name}>
+            <TableRow key={row.id}>
               <TableCell component="th" scope="row">
                 {row.methodType}
               </TableCell>
               <TableCell align="right">{row.nameOnCard}</TableCell>
               <TableCell align="right">{row.cardBin}</TableCell>
               <TableCell align="right">{row.eWallet}</TableCell>
+              <TableCell align="right">{row.BillingAddress.country}</TableCell>
             </TableRow>
           ))}
         </TableBody>
