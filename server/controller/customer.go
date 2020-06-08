@@ -39,7 +39,6 @@ func CreateCustomer(c *gin.Context) {
 		errors.HandleErr(c, locErr)
 		errors.HandleErr(c, cusErr)
 		c.JSON(http.StatusOK, gin.H{"customerID": customerID})
-
 	}
 }
 
@@ -209,10 +208,4 @@ func checkCustomerExists(customer db.Customer) bool {
 		return false
 	}
 	return true
-}
-
-func checkErr(err error) {
-	if err != nil {
-		panic(err)
-	}
 }
