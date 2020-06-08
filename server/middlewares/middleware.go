@@ -3,9 +3,11 @@
 package middlewares
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/rogaha/go-postgres-jwt-react-starter/server/config"
+	"github.com/rogaha/go-postgres-jwt-react-starter/server/controller"
 
 	"github.com/gin-gonic/gin"
 )
@@ -34,5 +36,26 @@ func CORSMiddleware() gin.HandlerFunc {
 			return
 		}
 		c.Next()
+	}
+}
+
+// AuthMiddleware //
+func AuthMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		fmt.Println("route", c.Request.URL.Path, c.Request.Method)
+		if c.Request.URL.Path == "/login" || c.Request.URL.Path == "/register" {
+			c.Next()
+			return
+		}
+		var jwtKey = []byte("secret")
+		_, isAuthenticated := controller.AuthMiddleware(c, jwtKey)
+		if !isAuthenticated {
+			c.JSON(http.StatusUnauthorized, gin.H{"success": false, "msg": "unauthorized"})
+			c.AbortWithStatus(http.StatusUnauthorized)
+			return
+		}
+		fmt.Println(">>>>>>>>>>>>>", isAuthenticated)
+		c.Next()
+		return
 	}
 }
