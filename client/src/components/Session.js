@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import { apiURl } from '../api'
-import { deleteCookie } from '../utils'
+import React, { useState, useEffect } from 'react';
+import { apiURl } from '../api';
+import { deleteCookie } from '../utils';
 
 const Session = ({ history }) => {
   const [state, setState] = useState({
     isFetching: false,
     message: null,
     user: null,
-  })
+  });
 
-  const { isFetching, message, user = {} } = state
+  const { isFetching, message, user = {} } = state;
 
   const getUserInfo = async () => {
-    setState({ ...state, isFetching: true, message: 'fetching details...' })
+    setState({ ...state, isFetching: true, message: 'fetching details...' });
     try {
       const res = await fetch(`${apiURl}/session`, {
         method: 'GET',
@@ -21,29 +21,29 @@ const Session = ({ history }) => {
           Accept: 'application/json',
           Authorization: document.cookie,
         },
-      }).then(res => res.json())
+      }).then((res) => res.json());
 
-      const { success, user } = res
+      const { success, user } = res;
       if (!success) {
-        history.push('/login')
+        history.push('/login');
       }
-      setState({ ...state, user, message: null, isFetching: false })
+      setState({ ...state, user, message: null, isFetching: false });
     } catch (e) {
-      setState({ ...state, message: e.toString(), isFetching: false })
+      setState({ ...state, message: e.toString(), isFetching: false });
     }
-  }
+  };
 
   const handleLogout = () => {
-    deleteCookie('token')
-    history.push('/login')
-  }
+    deleteCookie('token');
+    history.push('/login');
+  };
 
   useEffect(() => {
     if (history.location.state) {
-      return setState({ ...state, user: { ...history.location.state } })
+      return setState({ ...state, user: { ...history.location.state } });
     }
-    getUserInfo()
-  }, [])
+    getUserInfo();
+  }, []);
 
   return (
     <div className="wrapper">
@@ -56,13 +56,13 @@ const Session = ({ history }) => {
       <button
         style={{ height: '30px' }}
         onClick={() => {
-         handleLogout()
+          handleLogout();
         }}
       >
         logout
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default Session
+export default Session;
