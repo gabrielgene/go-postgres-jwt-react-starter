@@ -5,6 +5,9 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.10.1",
+    "formik": "^2.1.4",
+    "pigeon-maps": "^0.15.0",
+    "pigeon-marker": "^0.3.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
