@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/gabrielgene/go-postgres-jwt-react-starter/server/db"
+	"github.com/gabrielgene/go-postgres-jwt-react-starter/server/errors"
 	"github.com/gin-gonic/gin"
-	"github.com/rogaha/go-postgres-jwt-react-starter/server/db"
-	"github.com/rogaha/go-postgres-jwt-react-starter/server/errors"
 )
 
 // GetAllPayments Controller

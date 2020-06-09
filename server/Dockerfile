@@ -1,6 +1,8 @@
 
 FROM golang:alpine 
 
+RUN echo $GOPATH
+
 RUN apk add --update git
 
 ADD . $GOPATH/src/build/

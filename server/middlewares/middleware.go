@@ -5,8 +5,8 @@ package middlewares
 import (
 	"net/http"
 
-	"github.com/rogaha/go-postgres-jwt-react-starter/server/config"
-	"github.com/rogaha/go-postgres-jwt-react-starter/server/controller"
+	"github.com/gabrielgene/go-postgres-jwt-react-starter/server/config"
+	"github.com/gabrielgene/go-postgres-jwt-react-starter/server/controller"
 
 	"github.com/gin-gonic/gin"
 )
