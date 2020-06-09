@@ -1,9 +1,5 @@
 # GO-React starter
-![](./assets/logo.png)
-
-This is a boilerplate/starter for a go and react project.
-
-It uses the go gin framework.
+![](./assets/cypress.png)
 
 
 ## Getting started
@@ -81,6 +77,15 @@ To start the react app navigate to the client directory
 
 * /session
 
+## Running tests
+
+```bash
+> cd client
+> yarn install
+> yarn run cypress open
+```
+
+Run the `general.spec.js` inside `tests` folder and watch the application being tested 🍿
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
