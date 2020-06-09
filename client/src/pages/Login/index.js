@@ -105,6 +105,7 @@ const Login = ({ history }) => {
             onClick={() => history.push('/register')}
             variant="contained"
             fullWidth
+            data-cy="register"
           >
             Register
           </Button>
