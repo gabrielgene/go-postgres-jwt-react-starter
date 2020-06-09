@@ -49,7 +49,7 @@ const Register = ({ history }) => {
         });
       }
 
-      history.push('/login');
+      history.push('/');
     } catch (e) {
       setState({ ...state, message: e.toString(), isSubmitting: false });
     }
