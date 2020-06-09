@@ -1,9 +1,5 @@
 # GO-React starter
-![](./assets/logo.png)
-
-This is a boilerplate/starter for a go and react project.
-
-It uses the go gin framework.
+![](./assets/cypress.png)
 
 
 ## Getting started
