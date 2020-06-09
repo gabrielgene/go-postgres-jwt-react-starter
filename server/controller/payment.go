@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -92,7 +91,6 @@ func CreatePayment(c *gin.Context) {
 		payment.BillingAddress.Country,
 		payment.BillingAddress.Street1,
 	).Scan(&billingAddressID)
-	fmt.Println("billing address id =", billingAddressID)
 
 	var paymentID int
 	cusErr := db.DB.QueryRow(
@@ -107,8 +105,6 @@ func CreatePayment(c *gin.Context) {
 		payment.EWallet,
 		payment.NameOnCard,
 	).Scan(&paymentID)
-	fmt.Println("payment id =", paymentID)
-
 	errors.HandleErr(c, locErr)
 	errors.HandleErr(c, cusErr)
 	c.JSON(http.StatusOK, gin.H{"paymentID": paymentID})
