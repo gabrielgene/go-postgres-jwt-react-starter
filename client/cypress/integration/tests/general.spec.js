@@ -18,7 +18,7 @@ context('General', () => {
   });
 
   it('Register a new user', () => {
-    cy.get('.MuiPaper-root > :nth-child(5)').click();
+    cy.get('[data-cy=register]').click();
     cy.wait(1000);
     cy.get('[data-cy=name]').type('teste');
     cy.get('[data-cy=email]').type('teste@test.com');
