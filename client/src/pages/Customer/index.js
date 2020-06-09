@@ -34,7 +34,7 @@ const Customer = (props) => {
           <div style={{ display: 'flex' }}>
             <S.Profile>
               <Paper>
-                <OpenMap />
+                <OpenMap position={[Location.latitude, Location.longitude]} />
                 <S.Info>
                   <Typography variant="h6" gutterBottom>
                     {name}
