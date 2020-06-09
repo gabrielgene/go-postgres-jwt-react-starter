@@ -58,8 +58,8 @@ const CustomerAdd = (props) => {
           eWallet: values.eWallet,
           nameOnCard: values.nameOnCard,
           billingAddress: {
-            latitude: parseInt(values.latitude, 10),
-            longitude: parseInt(values.longitude, 10),
+            latitude: parseFloat(values.latitude),
+            longitude: parseFloat(values.longitude),
             country: values.country,
             street1: values.street,
           },
