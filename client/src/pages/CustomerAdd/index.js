@@ -46,11 +46,15 @@ const CustomerAdd = (props) => {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify({
-          ...values,
-          customerID: isEditMode && parseInt(editState.customerID, 10),
+          customerID: isEditMode
+            ? parseInt(editState.customerID, 10)
+            : undefined,
+          email: values.email,
+          name: values.name,
+          telephone: values.telephone,
           location: {
-            latitude: values.latitude,
-            longitude: values.longitude,
+            latitude: parseInt(values.latitude, 10),
+            longitude: parseInt(values.longitude, 10),
             country: values.country,
             street1: values.street,
           },
@@ -140,7 +144,7 @@ const CustomerAdd = (props) => {
           Cancelar
         </Button>
         <Button onClick={handleSubmit} color="primary" data-cy="submit">
-          Editar
+          {isEditMode ? 'Editar' : 'Salvar'}
         </Button>
       </DialogActions>
     </Dialog>

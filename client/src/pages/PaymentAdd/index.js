@@ -45,17 +45,23 @@ const CustomerAdd = (props) => {
       street1: '',
     },
     onSubmit: (values) => {
-      const { country, latitude, longitude, street1 } = values;
       fetch(`${apiURl}/paymentmethods`, {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify({
           customerID: parseInt(customerID, 10),
+          methodType: values.methodType,
+          cardBin: values.cardBin,
+          cardLastFour: values.cardLastFour,
+          expiryMonth: values.expiryMonth,
+          expiryYear: values.expiryYear,
+          eWallet: values.eWallet,
+          nameOnCard: values.nameOnCard,
           billingAddress: {
-            country,
-            latitude,
-            longitude,
-            street1,
+            latitude: parseInt(values.latitude, 10),
+            longitude: parseInt(values.longitude, 10),
+            country: values.country,
+            street1: values.street,
           },
           ...values,
         }),
